@@ -46,6 +46,6 @@ Formi('add', 1, 2, 3) // ==> 6
 
 
 var nor = F('not', F('or', true, false));
-var nor = Fo.chain(true, false).or().not().get();
+var nor = F.chain(true, false).or().not().get();
 
 ```
