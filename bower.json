@@ -1,0 +1,28 @@
+{
+  "name": "formi",
+  "version": "0.1.0",
+  "homepage": "https://github.com/krambuhl/formi",
+  "authors": [
+    "Evan Krambuhl <thekrambuhl@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "description": "Functional conditions and compositions.",
+  "keywords": [
+    "composition"
+  ],
+  "main": "dist/formi.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krambuhl/formi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/krambuhl/formi/issues"
+  }
+}

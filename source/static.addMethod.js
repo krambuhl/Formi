@@ -1,0 +1,3 @@
+Formi.addMethod = function() {
+
+};
