@@ -1,0 +1,1 @@
+Formi.version = '/* @echo VERSION */';

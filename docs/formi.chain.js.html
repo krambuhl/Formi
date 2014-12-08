@@ -71,8 +71,8 @@
       <div class="row">
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
-            <li class="active"><a href="index.html">Main</a></li>
-            <li><a href="formi.chain.js.html">formi.chain.js</a></li>
+            <li><a href="index.html">Main</a></li>
+            <li class="active"><a href="formi.chain.js.html">formi.chain.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
             <li><a href="formi.run.js.html">formi.run.js</a></li>
             <li><a href="formi.version.js.html">formi.version.js</a></li>
@@ -80,35 +80,23 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#chain"><i class="alert alert-info"></i><span>chain</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="Main"><h1>Formi</h1>
-<p>Functional API for javascript.</p><h2>API</h2>
-<p>Formi exposes the <code>Formi</code> function.</p><h3>Formi(function, args...)</h3>
-<p><strong>Basic Example</strong></p><pre><code class="lang-js">// define predicate function
-var not = function(val) {
-    return !val;
-};
-
-var or = function() {
-    return _.some(arguments);
-};
-
-Formi(not, true) // ==&gt; false
-Formi(or, false, false) // ==&gt; false
-Formi(or, false, true, false) // ==&gt; true
-</code></pre>
-<h3>Formi.run(function, array)</h3>
-<p>Used for making function calls consistantly.  Simplifies writing compond functions.</p><p><strong>Example</strong></p><pre><code class="lang-js">var nor = function() {
-    return Formi(not, Formi.run(or, arguments));
-};
-
-Formi.run(nor, [false, false]) // ==&gt; true
-</code></pre>
-<h3>Formi.chain(args...)</h3>
-<p>Creates a monadic chain for transforming data.</p></section>
+          <section id="chain">
+            <h1>chain</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.chain()</span>
+            </p>
+          </section>
+          <div class="description"> </div>
+          <pre><code class="language-javascript">Formi.chain = function() {
+  
+};</code></pre>
         </div>
       </div>
     </div>

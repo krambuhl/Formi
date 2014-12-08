@@ -7,8 +7,8 @@
  *
  */
 
-var Formi = function(method, values) {};
+function Formi(func, args) { };
 
-//=include("./formi.proto.js")
-//=include("./static.addMethod.js")
-//=include("./static.chain.js")
+//=include("./formi.version.js")
+//=include("./formi.run.js")
+//=include("./formi.chain.js")

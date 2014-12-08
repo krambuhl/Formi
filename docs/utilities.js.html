@@ -72,8 +72,10 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
+            <li><a href="formi.chain.js.html">formi.chain.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
-            <li><a href="formi.proto.js.html">formi.proto.js</a></li>
+            <li><a href="formi.run.js.html">formi.run.js</a></li>
+            <li><a href="formi.version.js.html">formi.version.js</a></li>
             <li class="active"><a href="utilities.js.html">utilities.js</a></li>
           </ul>
           <div class="scrollspy">
@@ -81,6 +83,10 @@
               <li><a href="#Utl"><i class="alert alert-success"></i><span>Utl</span></a>
               </li>
               <li><a href="#def"><i class="alert alert-info"></i><span>def</span></a>
+              </li>
+              <li><a href="#result"><i class="alert alert-info"></i><span>result</span></a>
+              </li>
+              <li><a href="#names"><i class="alert alert-info"></i><span>names</span></a>
               </li>
             </ul>
           </div>
@@ -102,9 +108,94 @@
               <div class="label label-info radius ctx-type">method</div><span>Utl.def()</span> -><span>Value</span>
             </p>
           </section>
-          <div class="description"><p>Utilities.def</p><p>Returns first non-undefined argument</p> </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Arguments</td>
+                <td>List</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Utl.def</p><p>Returns first non-undefined argument</p> </div>
           <pre><code class="language-javascript">Utl.def = function() {
   return _.find(arguments);
+};</code></pre>
+          <section id="result">
+            <h1>result</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>Utl.result()</span> -><span>Value</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Expression</td>
+                <td>Function,Value</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Context</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Utl.result</p><p>returns result of an expression</p> </div>
+          <pre><code class="language-javascript">Utl.result = function(expr, context) {
+  return _.isFunction(expr) ? expr.apply(context) : expr;
+};</code></pre>
+          <section id="names">
+            <h1>names</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>Utl.names()</span> -><span>Array</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Space</td>
+                <td>String</td>
+                <td>seperated string</td>
+              </tr>
+              <tr>
+                <td>Context</td>
+                <td>Ojbect</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Utl.names</p><p>Returns list of names seperated by space </p> </div>
+          <pre><code class="language-javascript">Utl.names = function(name, context) {
+  // get result of name if defined as a function
+  var events = Utl.result(names, context);
+
+  // split by spaces if result isn't an array
+  // always returns an array
+  return _.isArray(events) ? events : events &amp;&amp; events.split(' ');
 };</code></pre>
         </div>
       </div>

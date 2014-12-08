@@ -20,28 +20,61 @@ var Utl = {};
 
 
 /**
- * Utilities.def
+ * Utl.def
  *
  * Returns first non-undefined argument
- * 
- * @return  {Value} 
+ * @param   {List}  Arguments
+ * @return  {Value} Value
  */
 
 Utl.def = function() {
   return _.find(arguments);
 };
 
+
+/**
+ * Utl.result
+ *
+ * returns result of an expression
+ *
+ * @param   {Function,Value}  Expression
+ * @param   {Object}  Context
+ * @return  {Value} Value
+ */
+
+Utl.result = function(expr, context) {
+  return _.isFunction(expr) ? expr.apply(context) : expr;
+};
+
+/**
+ * Utl.names
+ *
+ * Returns list of names seperated by space 
+ * 
+ * @param   {String}  Space seperated string
+ * @param   {Ojbect}  Context
+ * @return  {Array} Names Array of strings
+ */
+
+Utl.names = function(name, context) {
+  // get result of name if defined as a function
+  var events = Utl.result(names, context);
+
+  // split by spaces if result isn't an array
+  // always returns an array
+  return _.isArray(events) ? events : events && events.split(' ');
+};
+
+
 /**
  * __Formi(func)__
  *
  */
 
-var Formi = function(method, values) {};
+function Formi(func, args) {};
 
-Formi.prototype = {
-  VERSION: '0.1.0'
-};
-Formi.addMethod = function() {
+Formi.version = '0.1.0';
+Formi.run = function(func, args) {
 
 };
 Formi.chain = function() {
