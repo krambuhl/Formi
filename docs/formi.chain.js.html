@@ -73,6 +73,7 @@
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
             <li class="active"><a href="formi.chain.js.html">formi.chain.js</a></li>
+            <li><a href="formi.idenity.js.html">formi.idenity.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
             <li><a href="formi.run.js.html">formi.run.js</a></li>
             <li><a href="formi.version.js.html">formi.version.js</a></li>
@@ -95,7 +96,27 @@
           </section>
           <div class="description"> </div>
           <pre><code class="language-javascript">Formi.chain = function() {
-  
+  if (arguments[0] instanceof Formi.chain) {
+    return arguments[0];
+  }
+
+  if (!(this instanceof Formi.chain)) {
+    return construct(Formi.chain, arguments);
+  }
+
+  this.data = slice(arguments);
+  return this;
+};
+
+Formi.chain.prototype = {
+  pipe: function(func) {
+    this.data = Formi.run(func, this.data, this);
+    return this;
+  },
+
+  value: function() {
+    return this.data;
+  }
 };</code></pre>
         </div>
       </div>

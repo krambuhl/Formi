@@ -1,55 +1,30 @@
 /**
- * Utilities
+ * slice 
  *
- * Defines global utility functions
+ * Converts arguments to array
  *
+ * @param   {Arguments}  Arguments
+ * @return  {Array} Array
  */
 
-var Utl = {};
-
+function slice(args, offset) {
+  return Array.prototype.slice.call(args, offset || 0);
+}
 
 /**
- * Utl.def
+ * construct
  *
- * Returns first non-undefined argument
- * @param   {List}  Arguments
- * @return  {Value} Value
+ * Constructs new instance with a 
+ * variable number of arguments
+ *
+ * @param   {Function}  Constructor
+ * @return  {Array} Arguments
  */
 
-Utl.def = function() {
-  return _.find(arguments);
-};
-
-
-/**
- * Utl.result
- *
- * returns result of an expression
- *
- * @param   {Function,Value}  Expression
- * @param   {Object}  Context
- * @return  {Value} Value
- */
-
-Utl.result = function(expr, context) {
-  return _.isFunction(expr) ? expr.apply(context) : expr;
-};
-
-/**
- * Utl.names
- *
- * Returns list of names seperated by space 
- * 
- * @param   {String}  Space seperated string
- * @param   {Ojbect}  Context
- * @return  {Array} Names Array of strings
- */
-
-Utl.names = function(name, context) {
-  // get result of name if defined as a function
-  var events = Utl.result(names, context);
-
-  // split by spaces if result isn't an array
-  // always returns an array
-  return _.isArray(events) ? events : events && events.split(' ');
-};
+function construct(ctor, args) {
+  function F() {
+    return ctor.apply(this, args);
+  }
+  F.prototype = ctor.prototype;
+  return new F();
+}

@@ -30,7 +30,7 @@ Formi(or, false, true, false) // ==> true
 
 ###Formi.run(function, array)
 
-Used for making function calls consistantly.  Simplifies writing compond functions.
+`Formi.run` applys an array of arguments to a function. Used for making calls when unsure 
 
 __Example__
 
@@ -44,17 +44,19 @@ Formi.run(nor, [false, false]) // ==> true
 
 ###Formi.chain(args...)
 
-Creates a monadic chain for transforming data.
+Creates a chain for transforming data.
 
 __Example__
 
 ```js
 var add = function() {
-    return _.reduce(arguments, function(total, num) {}, 0)
+    return _.reduce(arguments, function(total, num) {
+        return total + num;
+    }, 0)
 }
 
 var even = function() {
-    return _.where(arguments, function(val) {
+    return _.filter(arguments, function(val) {
         return val % 2 === 0;
     });
 }
@@ -62,9 +64,18 @@ var even = function() {
 Formi.chain(1, 2, 3, 4)
     .pipe(even)
     .pipe(add)
-    .value();
+    .value(); // ==> 6
 ```
 
+__Compound Example__
+
+In simple chains like above, it might make more sense to create a composite functions.
+
+```js
+var addEven = function() {
+    return Formi.run(add, Formi.run(even, arguments));
+}
+```
 
 
 

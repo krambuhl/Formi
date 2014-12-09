@@ -73,6 +73,7 @@
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
             <li><a href="formi.chain.js.html">formi.chain.js</a></li>
+            <li><a href="formi.idenity.js.html">formi.idenity.js</a></li>
             <li class="active"><a href="formi.js.html">formi.js</a></li>
             <li><a href="formi.run.js.html">formi.run.js</a></li>
             <li><a href="formi.version.js.html">formi.version.js</a></li>
@@ -94,9 +95,12 @@
             </p>
           </section>
           <div class="description"><p><strong>Formi(func)</strong></p> </div>
-          <pre><code class="language-javascript">function Formi(func, args) {};
+          <pre><code class="language-javascript">function Formi(func, args) {
+  return Formi.run(func, slice(arguments, 1));
+}
 
 //=include(&quot;./formi.version.js&quot;)
+//=include(&quot;./formi.idenity.js&quot;)
 //=include(&quot;./formi.run.js&quot;)
 //=include(&quot;./formi.chain.js&quot;)</code></pre>
         </div>

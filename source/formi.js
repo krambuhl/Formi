@@ -7,8 +7,11 @@
  *
  */
 
-function Formi(func, args) { };
+function Formi(func, args) {
+  return Formi.run(func, slice(arguments, 1));
+}
 
 //=include("./formi.version.js")
+//=include("./formi.idenity.js")
 //=include("./formi.run.js")
 //=include("./formi.chain.js")
