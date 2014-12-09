@@ -72,12 +72,11 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li class="active"><a href="index.html">Main</a></li>
-            <li><a href="formi.chain.js.html">formi.chain.js</a></li>
-            <li><a href="formi.identity.js.html">formi.identity.js</a></li>
+            <li><a href="chain.js.html">chain.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
-            <li><a href="formi.run.js.html">formi.run.js</a></li>
-            <li><a href="formi.version.js.html">formi.version.js</a></li>
+            <li><a href="identity.js.html">identity.js</a></li>
             <li><a href="utilities.js.html">utilities.js</a></li>
+            <li><a href="version.js.html">version.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
@@ -86,8 +85,8 @@
         </div>
         <div class="span9">
           <section id="Main"><h1>Formi</h1>
-<p>Functional API for javascript.</p><h2>API</h2>
-<p>Formi exposes the <code>Formi</code> function.</p><h3>Formi(function, args...)</h3>
+<p>Functional API.</p><h2>API</h2>
+<p>Formi exposes the <code>Formi</code> function.</p><h3>Formi(function, args)</h3>
 <p><strong>Example</strong></p><pre><code class="lang-js">// define predicate function
 var not = function(val) {
     return !val;
@@ -100,13 +99,13 @@ var or = function() {
 Formi(not, true) // ==&gt; false
 Formi(or, false, false) // ==&gt; false
 Formi(or, false, true, false) // ==&gt; true
-</code></pre>
-<h3>Formi.run(function, array)</h3>
-<p><code>Formi.run</code> applys an array of arguments to a function. Used for making calls when unsure </p><p><strong>Example</strong></p><pre><code class="lang-js">var nor = function() {
-    return Formi(not, Formi.run(or, arguments));
+
+
+var nor = function() {
+    return Formi(not, Formi(or, arguments));
 };
 
-Formi.run(nor, [false, false]) // ==&gt; true
+Formi(nor, [false, false]) // ==&gt; true
 </code></pre>
 <h3>Formi.chain(args...)</h3>
 <p>Creates a chain for transforming data.</p><p><strong>Example</strong></p><pre><code class="lang-js">var add = function() {
@@ -128,11 +127,10 @@ Formi.chain(1, 2, 3, 4)
 </code></pre>
 <h4>Composite Functions</h4>
 <p>In simple chains like above, it might make more sense to create a composite functions.</p><pre><code class="lang-js">var addEven = function() {
-    return Formi.run(add, Formi.run(even, arguments));
+    return Formi(add, Formi(even, arguments));
 }
 
 Formi(addEven, 1, 2, 3, 4) // ==&gt; 6
-Formi.run(addEven, [1, 2, 3, 4]) // ==&gt; 6
 </code></pre>
 </section>
         </div>

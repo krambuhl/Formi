@@ -14,11 +14,25 @@
  * @return {Value} Value
  */
 
-function Formi(func, args) {
-  return Formi.run(func, slice(arguments, 1));
+function Formi(func, dat) {
+  // retrieve all possible data stuffs
+  var args = slice(arguments, 1),
+    data = slice(dat);
+  
+  // data is always sent as a list
+  if (!Array.isArray(data) || args.length > 1) {
+    data = args;
+  } 
+
+  // default to Identity if no function is defined
+  if (func === undefined || typeof(func) !== 'function') {
+    func = Formi.identity;
+  }
+
+  // return function & argument result
+  return func.apply(undefined, data);
 }
 
-//=include("./formi.version.js")
-//=include("./formi.identity.js")
-//=include("./formi.run.js")
-//=include("./formi.chain.js")
+//=include("./version.js")
+//=include("./identity.js")
+//=include("./chain.js")

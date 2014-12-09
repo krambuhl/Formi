@@ -72,26 +72,69 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
-            <li><a href="formi.chain.js.html">formi.chain.js</a></li>
-            <li><a href="formi.identity.js.html">formi.identity.js</a></li>
+            <li class="active"><a href="chain.js.html">chain.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
-            <li class="active"><a href="formi.run.js.html">formi.run.js</a></li>
-            <li><a href="formi.version.js.html">formi.version.js</a></li>
+            <li><a href="identity.js.html">identity.js</a></li>
             <li><a href="utilities.js.html">utilities.js</a></li>
+            <li><a href="version.js.html">version.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#run"><i class="alert alert-info"></i><span>run</span></a>
+              <li><a href="#chain"><i class="alert alert-info"></i><span>chain</span></a>
+              </li>
+              <li><a href="#pipe"><i class="alert alert-info"></i><span>pipe</span></a>
+              </li>
+              <li><a href="#value"><i class="alert alert-info"></i><span>value</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="run">
-            <h1>run</h1>
+          <section id="chain">
+            <h1>chain</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>Formi.run()</span> -><span>Value</span>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.chain()</span> -><span>Instance</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Arguments</td>
+                <td>Arguments</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p><strong>Formi.chain(args...)</strong></p><p>Returns a chainable instance for transforming data.<br />Provides an API for applying transforms and return values.</p> </div>
+          <pre><code class="language-javascript">Formi.chain = function() {
+  // return chain if data is a chain instance
+  if (arguments[0] instanceof Formi.chain) {
+    return arguments[0];
+  }
+
+  // call constructor if called without `new`
+  if (!(this instanceof Formi.chain)) {
+    return construct(Formi.chain, arguments);
+  }
+
+  // define public property for data in transit
+  this.data = slice(arguments);
+
+  return this;
+};</code></pre>
+          <section id="pipe">
+            <h1>pipe</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.chain.prototype.pipe()</span> -><span>Formi.Chain</span>
             </p>
           </section>
           <table class="table table-bordered table-striped">
@@ -106,27 +149,27 @@
               <tr>
                 <td>Function</td>
                 <td>Function</td>
-                <td>function that takes, manipulates, and returns data</td>
-              </tr>
-              <tr>
-                <td>Arguments</td>
-                <td>Arguments</td>
-                <td>arguments applied to function</td>
-              </tr>
-              <tr>
-                <td>Context</td>
-                <td>Instance</td>
-                <td>context applid to function </td>
+                <td>Data transform function</td>
               </tr>
             </tbody>
           </table>
-          <div class="description"><p><strong>Formi.run(func, args, context)</strong></p><p>Runs a function with provided arguments and optional context<br />If function is undefined, an identity function is used instead</p> </div>
-          <pre><code class="language-javascript">Formi.run = function(func, args, context) {
-  if (func === undefined || typeof(func) !== 'function') {
-    func = Formi.identity;
-  }
-
-  return func.apply(context, slice(args));
+          <div class="description"><p><strong>Formi.chain().pipe(function)</strong></p><p>Transform chained data with function and returns chain</p> </div>
+          <pre><code class="language-javascript">Formi.chain.prototype.pipe = function(func) {
+  // pass Formi return back to data and return the chain
+  this.data = Formi(func, this.data);
+  return this;
+};</code></pre>
+          <section id="value">
+            <h1>value</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.chain.prototype.value()</span> -><span>Value</span>
+            </p>
+          </section>
+          <div class="description"><p><strong>Formi.chain().value()</strong></p><p>Returns a copy of chained data.</p> </div>
+          <pre><code class="language-javascript">Formi.chain.prototype.value = function() {
+  // exports data out of chain
+  return this.data;
 };</code></pre>
         </div>
       </div>

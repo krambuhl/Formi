@@ -1,7 +1,7 @@
 Formi
 === 
 
-Functional API for javascript.
+Functional API.
 
 
 API
@@ -9,7 +9,7 @@ API
 
 Formi exposes the `Formi` function.
 
-###Formi(function, args...)
+###Formi(function, args)
 
 __Example__
 
@@ -26,20 +26,13 @@ var or = function() {
 Formi(not, true) // ==> false
 Formi(or, false, false) // ==> false
 Formi(or, false, true, false) // ==> true
-```
 
-###Formi.run(function, array)
 
-`Formi.run` applys an array of arguments to a function. Used for making calls when unsure 
-
-__Example__
-
-```js
 var nor = function() {
-    return Formi(not, Formi.run(or, arguments));
+    return Formi(not, Formi(or, arguments));
 };
 
-Formi.run(nor, [false, false]) // ==> true
+Formi(nor, [false, false]) // ==> true
 ```
 
 ###Formi.chain(args...)
@@ -73,11 +66,10 @@ In simple chains like above, it might make more sense to create a composite func
 
 ```js
 var addEven = function() {
-    return Formi.run(add, Formi.run(even, arguments));
+    return Formi(add, Formi(even, arguments));
 }
 
 Formi(addEven, 1, 2, 3, 4) // ==> 6
-Formi.run(addEven, [1, 2, 3, 4]) // ==> 6
 ```
 
 

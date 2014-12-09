@@ -72,12 +72,11 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
-            <li><a href="formi.chain.js.html">formi.chain.js</a></li>
-            <li><a href="formi.identity.js.html">formi.identity.js</a></li>
+            <li><a href="chain.js.html">chain.js</a></li>
             <li class="active"><a href="formi.js.html">formi.js</a></li>
-            <li><a href="formi.run.js.html">formi.run.js</a></li>
-            <li><a href="formi.version.js.html">formi.version.js</a></li>
+            <li><a href="identity.js.html">identity.js</a></li>
             <li><a href="utilities.js.html">utilities.js</a></li>
+            <li><a href="version.js.html">version.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
@@ -116,14 +115,28 @@
             </tbody>
           </table>
           <div class="description"><p><strong>Formi(func, args...)</strong></p><p>Runs a function with provided arguments<br />If function is undefined, an identity function is used instead</p> </div>
-          <pre><code class="language-javascript">function Formi(func, args) {
-  return Formi.run(func, slice(arguments, 1));
+          <pre><code class="language-javascript">function Formi(func, dat) {
+  // retrieve all possible data stuffs
+  var args = slice(arguments, 1),
+    data = slice(dat);
+  
+  // data is always sent as a list
+  if (!Array.isArray(data) || args.length &gt; 1) {
+    data = args;
+  } 
+
+  // default to Identity if no function is defined
+  if (func === undefined || typeof(func) !== 'function') {
+    func = Formi.identity;
+  }
+
+  // return function &amp; argument result
+  return func.apply(undefined, data);
 }
 
-//=include(&quot;./formi.version.js&quot;)
-//=include(&quot;./formi.identity.js&quot;)
-//=include(&quot;./formi.run.js&quot;)
-//=include(&quot;./formi.chain.js&quot;)</code></pre>
+//=include(&quot;./version.js&quot;)
+//=include(&quot;./identity.js&quot;)
+//=include(&quot;./chain.js&quot;)</code></pre>
         </div>
       </div>
     </div>

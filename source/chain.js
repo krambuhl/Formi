@@ -9,15 +9,19 @@
  */
 
 Formi.chain = function() {
+  // return chain if data is a chain instance
   if (arguments[0] instanceof Formi.chain) {
     return arguments[0];
   }
 
+  // call constructor if called without `new`
   if (!(this instanceof Formi.chain)) {
     return construct(Formi.chain, arguments);
   }
 
+  // define public property for data in transit
   this.data = slice(arguments);
+
   return this;
 };
 
@@ -32,7 +36,8 @@ Formi.chain = function() {
  */
 
 Formi.chain.prototype.pipe = function(func) {
-  this.data = Formi.run(func, this.data, this);
+  // pass Formi return back to data and return the chain
+  this.data = Formi(func, this.data);
   return this;
 };
 
@@ -40,11 +45,12 @@ Formi.chain.prototype.pipe = function(func) {
 /**
  * __Formi.chain().value()__
  *
- * Returns a copy of chained data data.
+ * Returns a copy of chained data.
  *
- * @return  {Value} 
+ * @return  {Value} Data Data wrapped in chain
  */
 
 Formi.chain.prototype.value = function() {
+  // exports data out of chain
   return this.data;
 };

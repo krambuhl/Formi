@@ -4,4 +4,4 @@
  * Keep track of version tied to `package.json`
  */
 
- Formi.version = '/* @echo VERSION */';
+ Formi.version = '/* @echo version */';

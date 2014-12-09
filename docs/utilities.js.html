@@ -72,12 +72,11 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
-            <li><a href="formi.chain.js.html">formi.chain.js</a></li>
-            <li><a href="formi.identity.js.html">formi.identity.js</a></li>
+            <li><a href="chain.js.html">chain.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
-            <li><a href="formi.run.js.html">formi.run.js</a></li>
-            <li><a href="formi.version.js.html">formi.version.js</a></li>
+            <li><a href="identity.js.html">identity.js</a></li>
             <li class="active"><a href="utilities.js.html">utilities.js</a></li>
+            <li><a href="version.js.html">version.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
@@ -124,7 +123,7 @@
           </table>
           <div class="description"><p><strong>slice(args, offset)</strong></p><p>Converts arguments to array</p> </div>
           <pre><code class="language-javascript">function slice(args, begin, end) {
-  return Array.prototype.slice.call(args, offset || 0);
+  return Array.prototype.slice.call(args, begin, end);
 }</code></pre>
           <section id="construct">
             <h1>construct</h1>

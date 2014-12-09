@@ -72,53 +72,29 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
-            <li><a href="formi.chain.js.html">formi.chain.js</a></li>
-            <li class="active"><a href="formi.identity.js.html">formi.identity.js</a></li>
+            <li><a href="chain.js.html">chain.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
-            <li><a href="formi.run.js.html">formi.run.js</a></li>
-            <li><a href="formi.version.js.html">formi.version.js</a></li>
+            <li><a href="identity.js.html">identity.js</a></li>
             <li><a href="utilities.js.html">utilities.js</a></li>
+            <li class="active"><a href="version.js.html">version.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#identity"><i class="alert alert-info"></i><span>identity</span></a>
+              <li><a href="#version"><i class="alert alert-success"></i><span>version</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="identity">
-            <h1>identity</h1>
+          <section id="version">
+            <h1>version</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>Formi.identity()</span> -><span>Value</span>
+              <div class="label label-success radius ctx-type">property</div><span>Formi.version</span>
             </p>
           </section>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th style="width:20%">Option name</th>
-                <th style="width:20%">Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Function</td>
-                <td>Function</td>
-                <td>takes data and returns data</td>
-              </tr>
-              <tr>
-                <td>Arguments</td>
-                <td>Arguments</td>
-                <td>applied to function </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="description"><p><strong>Formi.identity(func, args...)</strong></p><p>Returns all passed arguments unmodified.  Usually used internally.</p> </div>
-          <pre><code class="language-javascript">Formi.identity = function() {
- return arguments;
-};</code></pre>
+          <div class="description"><p><strong>Formi.version</strong></p><p>Keep track of version tied to <code>package.json</code></p> </div>
+          <pre><code class="language-javascript">Formi.version = '/* @echo version */';</code></pre>
         </div>
       </div>
     </div>

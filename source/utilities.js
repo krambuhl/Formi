@@ -10,7 +10,7 @@
  */
 
 function slice(args, begin, end) {
-  return Array.prototype.slice.call(args, offset || 0);
+  return Array.prototype.slice.call(args, begin, end);
 }
 
 /**

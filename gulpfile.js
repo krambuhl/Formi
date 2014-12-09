@@ -50,16 +50,8 @@ gulp.task('compile', function() {
   return gulp.src(path.join(dir.src, file.full))
     .pipe(sourcemaps.init())
     .pipe(fileinclude('//='))
-    .pipe(preprocess({
-      context: { 
-        VERSION: pkg.version
-      }
-    }))
-    .pipe(umd({
-      dependencies: function() {
-        return [];
-      }
-    }))
+    .pipe(preprocess({ context: pkg }))
+    .pipe(umd())
     .pipe(gulp.dest(dir.dist))
     .pipe(uglify())
     .pipe(rename(file.min))
