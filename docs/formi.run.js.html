@@ -73,7 +73,7 @@
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
             <li><a href="formi.chain.js.html">formi.chain.js</a></li>
-            <li><a href="formi.idenity.js.html">formi.idenity.js</a></li>
+            <li><a href="formi.identity.js.html">formi.identity.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
             <li class="active"><a href="formi.run.js.html">formi.run.js</a></li>
             <li><a href="formi.version.js.html">formi.version.js</a></li>
@@ -91,13 +91,39 @@
             <h1>run</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>Formi.run()</span>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.run()</span> -><span>Value</span>
             </p>
           </section>
-          <div class="description"> </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Function</td>
+                <td>Function</td>
+                <td>function that takes, manipulates, and returns data</td>
+              </tr>
+              <tr>
+                <td>Arguments</td>
+                <td>Arguments</td>
+                <td>arguments applied to function</td>
+              </tr>
+              <tr>
+                <td>Context</td>
+                <td>Instance</td>
+                <td>context applid to function </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p><strong>Formi.run(func, args, context)</strong></p><p>Runs a function with provided arguments and optional context<br />If function is undefined, an identity function is used instead</p> </div>
           <pre><code class="language-javascript">Formi.run = function(func, args, context) {
   if (func === undefined || typeof(func) !== 'function') {
-    func = Formi.idenity;
+    func = Formi.identity;
   }
 
   return func.apply(context, slice(args));

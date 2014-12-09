@@ -3,8 +3,15 @@
 //=include("./utilities.js")
 
 /**
- * __Formi(func)__
+ * __Formi(func, args...)__
  *
+ * Runs a function with provided arguments
+ * If function is undefined, an identity function is used instead
+ *
+ * @param  {Function}  Function takes data and returns data
+ * @param  {Arguments} Arguments applied to function
+ *
+ * @return {Value} Value
  */
 
 function Formi(func, args) {
@@ -12,6 +19,6 @@ function Formi(func, args) {
 }
 
 //=include("./formi.version.js")
-//=include("./formi.idenity.js")
+//=include("./formi.identity.js")
 //=include("./formi.run.js")
 //=include("./formi.chain.js")

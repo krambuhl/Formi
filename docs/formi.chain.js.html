@@ -73,7 +73,7 @@
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
             <li class="active"><a href="formi.chain.js.html">formi.chain.js</a></li>
-            <li><a href="formi.idenity.js.html">formi.idenity.js</a></li>
+            <li><a href="formi.identity.js.html">formi.identity.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
             <li><a href="formi.run.js.html">formi.run.js</a></li>
             <li><a href="formi.version.js.html">formi.version.js</a></li>
@@ -83,6 +83,10 @@
             <ul class="nav nav-list bs-docs-sidenav affix-top">
               <li><a href="#chain"><i class="alert alert-info"></i><span>chain</span></a>
               </li>
+              <li><a href="#pipe"><i class="alert alert-info"></i><span>pipe</span></a>
+              </li>
+              <li><a href="#value"><i class="alert alert-info"></i><span>value</span></a>
+              </li>
             </ul>
           </div>
         </div>
@@ -91,10 +95,26 @@
             <h1>chain</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>Formi.chain()</span>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.chain()</span> -><span>Instance</span>
             </p>
           </section>
-          <div class="description"> </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Arguments</td>
+                <td>Arguments</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p><strong>Formi.chain(args...)</strong></p><p>Returns a chainable instance for transforming data.<br />Provides an API for applying transforms and return values.</p> </div>
           <pre><code class="language-javascript">Formi.chain = function() {
   if (arguments[0] instanceof Formi.chain) {
     return arguments[0];
@@ -106,17 +126,45 @@
 
   this.data = slice(arguments);
   return this;
-};
-
-Formi.chain.prototype = {
-  pipe: function(func) {
-    this.data = Formi.run(func, this.data, this);
-    return this;
-  },
-
-  value: function() {
-    return this.data;
-  }
+};</code></pre>
+          <section id="pipe">
+            <h1>pipe</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.chain.prototype.pipe()</span> -><span>Formi.Chain</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Function</td>
+                <td>Function</td>
+                <td>Data transform function</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p><strong>Formi.chain().pipe(function)</strong></p><p>Transform chained data with function and returns chain</p> </div>
+          <pre><code class="language-javascript">Formi.chain.prototype.pipe = function(func) {
+  this.data = Formi.run(func, this.data, this);
+  return this;
+};</code></pre>
+          <section id="value">
+            <h1>value</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.chain.prototype.value()</span> -><span>Value</span>
+            </p>
+          </section>
+          <div class="description"><p><strong>Formi.chain().value()</strong></p><p>Returns a copy of chained data data.</p> </div>
+          <pre><code class="language-javascript">Formi.chain.prototype.value = function() {
+  return this.data;
 };</code></pre>
         </div>
       </div>

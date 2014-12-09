@@ -73,7 +73,7 @@
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
             <li><a href="formi.chain.js.html">formi.chain.js</a></li>
-            <li><a href="formi.idenity.js.html">formi.idenity.js</a></li>
+            <li><a href="formi.identity.js.html">formi.identity.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
             <li><a href="formi.run.js.html">formi.run.js</a></li>
             <li><a href="formi.version.js.html">formi.version.js</a></li>
@@ -107,20 +107,30 @@
             <tbody>
               <tr>
                 <td>Arguments</td>
-                <td>Arguments</td>
+                <td>Array</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Begin</td>
+                <td>Integer</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>End</td>
+                <td>Integer</td>
                 <td></td>
               </tr>
             </tbody>
           </table>
-          <div class="description"><p>slice </p><p>Converts arguments to array</p> </div>
-          <pre><code class="language-javascript">function slice(args, offset) {
+          <div class="description"><p><strong>slice(args, offset)</strong></p><p>Converts arguments to array</p> </div>
+          <pre><code class="language-javascript">function slice(args, begin, end) {
   return Array.prototype.slice.call(args, offset || 0);
 }</code></pre>
           <section id="construct">
             <h1>construct</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">function</div><span>construct()</span> -><span>Array</span>
+              <div class="label label-info radius ctx-type">function</div><span>construct()</span> -><span>Instance</span>
             </p>
           </section>
           <table class="table table-bordered table-striped">
@@ -137,9 +147,14 @@
                 <td>Function</td>
                 <td></td>
               </tr>
+              <tr>
+                <td>Arguments</td>
+                <td>Array</td>
+                <td></td>
+              </tr>
             </tbody>
           </table>
-          <div class="description"><p>construct</p><p>Constructs new instance with a<br />variable number of arguments</p> </div>
+          <div class="description"><p><strong>construct</strong></p><p>Constructs new instance with a variable number of arguments</p> </div>
           <pre><code class="language-javascript">function construct(ctor, args) {
   function F() {
     return ctor.apply(this, args);

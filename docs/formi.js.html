@@ -73,7 +73,7 @@
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
             <li><a href="formi.chain.js.html">formi.chain.js</a></li>
-            <li><a href="formi.idenity.js.html">formi.idenity.js</a></li>
+            <li><a href="formi.identity.js.html">formi.identity.js</a></li>
             <li class="active"><a href="formi.js.html">formi.js</a></li>
             <li><a href="formi.run.js.html">formi.run.js</a></li>
             <li><a href="formi.version.js.html">formi.version.js</a></li>
@@ -91,16 +91,37 @@
             <h1>Formi</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">function</div><span>Formi()</span>
+              <div class="label label-info radius ctx-type">function</div><span>Formi()</span> -><span>Value</span>
             </p>
           </section>
-          <div class="description"><p><strong>Formi(func)</strong></p> </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Function</td>
+                <td>Function</td>
+                <td>takes data and returns data</td>
+              </tr>
+              <tr>
+                <td>Arguments</td>
+                <td>Arguments</td>
+                <td>applied to function </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p><strong>Formi(func, args...)</strong></p><p>Runs a function with provided arguments<br />If function is undefined, an identity function is used instead</p> </div>
           <pre><code class="language-javascript">function Formi(func, args) {
   return Formi.run(func, slice(arguments, 1));
 }
 
 //=include(&quot;./formi.version.js&quot;)
-//=include(&quot;./formi.idenity.js&quot;)
+//=include(&quot;./formi.identity.js&quot;)
 //=include(&quot;./formi.run.js&quot;)
 //=include(&quot;./formi.chain.js&quot;)</code></pre>
         </div>

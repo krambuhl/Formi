@@ -73,7 +73,7 @@
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li class="active"><a href="index.html">Main</a></li>
             <li><a href="formi.chain.js.html">formi.chain.js</a></li>
-            <li><a href="formi.idenity.js.html">formi.idenity.js</a></li>
+            <li><a href="formi.identity.js.html">formi.identity.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
             <li><a href="formi.run.js.html">formi.run.js</a></li>
             <li><a href="formi.version.js.html">formi.version.js</a></li>
@@ -88,7 +88,7 @@
           <section id="Main"><h1>Formi</h1>
 <p>Functional API for javascript.</p><h2>API</h2>
 <p>Formi exposes the <code>Formi</code> function.</p><h3>Formi(function, args...)</h3>
-<p><strong>Basic Example</strong></p><pre><code class="lang-js">// define predicate function
+<p><strong>Example</strong></p><pre><code class="lang-js">// define predicate function
 var not = function(val) {
     return !val;
 };
@@ -126,9 +126,13 @@ Formi.chain(1, 2, 3, 4)
     .pipe(add)
     .value(); // ==&gt; 6
 </code></pre>
-<p><strong>Compound Example</strong></p><p>In simple chains like above, it might make more sense to create a composite functions.</p><pre><code class="lang-js">var addEven = function() {
+<h4>Composite Functions</h4>
+<p>In simple chains like above, it might make more sense to create a composite functions.</p><pre><code class="lang-js">var addEven = function() {
     return Formi.run(add, Formi.run(even, arguments));
 }
+
+Formi(addEven, 1, 2, 3, 4) // ==&gt; 6
+Formi.run(addEven, [1, 2, 3, 4]) // ==&gt; 6
 </code></pre>
 </section>
         </div>

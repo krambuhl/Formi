@@ -11,7 +11,7 @@ Formi exposes the `Formi` function.
 
 ###Formi(function, args...)
 
-__Basic Example__
+__Example__
 
 ```js
 // define predicate function
@@ -67,7 +67,7 @@ Formi.chain(1, 2, 3, 4)
     .value(); // ==> 6
 ```
 
-__Compound Example__
+####Composite Functions
 
 In simple chains like above, it might make more sense to create a composite functions.
 
@@ -75,6 +75,9 @@ In simple chains like above, it might make more sense to create a composite func
 var addEven = function() {
     return Formi.run(add, Formi.run(even, arguments));
 }
+
+Formi(addEven, 1, 2, 3, 4) // ==> 6
+Formi.run(addEven, [1, 2, 3, 4]) // ==> 6
 ```
 
 
