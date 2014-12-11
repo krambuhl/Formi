@@ -6,6 +6,6 @@
  * @return {List} Arguments values passed to identity.
  */
 
- Formi.identity = function() {
+Formi.identity = function() {
   return slice(arguments);
 };

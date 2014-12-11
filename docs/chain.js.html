@@ -115,6 +115,8 @@
           </table>
           <div class="description"><p><strong>Formi.chain(args...)</strong></p><p>Returns a chainable instance for transforming data.<br />Provides an API for applying transforms and return values.</p> </div>
           <pre><code class="language-javascript">Formi.chain = function() {
+  var data;
+
   // return chain if data is a chain instance
   if (arguments[0] instanceof Formi.chain) {
     return arguments[0];
@@ -125,8 +127,17 @@
     return construct(Formi.chain, arguments);
   }
 
+  var args = slice(arguments);
+
+  // data is always sent as a list
+  if (Array.isArray(args[0]) &amp;&amp; args.length === 1) {
+    data = args[0];
+  } else {
+    data = args;
+  }
+
   // define public property for data in transit
-  this.data = slice(arguments);
+  this.data = data;
 
   return this;
 };</code></pre>
