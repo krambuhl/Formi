@@ -54,6 +54,10 @@ var even = function() {
     });
 }
 
+var addEven = function() {
+    return Formi(add, Formi(even, arguments));
+}
+
 Formi.chain(1, 2, 3, 4)
     .pipe(even)
     .pipe(add)
@@ -62,7 +66,7 @@ Formi.chain(1, 2, 3, 4)
 
 ####Composite Functions
 
-In simple chains like above, it might make more sense to create a composite functions.
+In simple chains like above, it might make sense to create a composite functions using Formi.
 
 ```js
 var addEven = function() {

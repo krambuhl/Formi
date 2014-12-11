@@ -3,12 +3,9 @@
  *
  * Returns all passed arguments unmodified.  Usually used internally.
  *
- * @param  {Function}  Function takes data and returns data
- * @param  {Arguments} Arguments applied to function
- *
- * @return {Value} Value
+ * @return {List} Arguments values passed to identity.
  */
 
  Formi.identity = function() {
-  return arguments;
+  return slice(arguments);
 };

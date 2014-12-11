@@ -90,33 +90,12 @@
             <h1>identity</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>Formi.identity()</span> -><span>Value</span>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.identity()</span> -><span>List</span>
             </p>
           </section>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th style="width:20%">Option name</th>
-                <th style="width:20%">Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Function</td>
-                <td>Function</td>
-                <td>takes data and returns data</td>
-              </tr>
-              <tr>
-                <td>Arguments</td>
-                <td>Arguments</td>
-                <td>applied to function </td>
-              </tr>
-            </tbody>
-          </table>
           <div class="description"><p><strong>Formi.identity(func, args...)</strong></p><p>Returns all passed arguments unmodified.  Usually used internally.</p> </div>
           <pre><code class="language-javascript">Formi.identity = function() {
- return arguments;
+ return slice(arguments);
 };</code></pre>
         </div>
       </div>

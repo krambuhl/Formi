@@ -120,13 +120,17 @@ var even = function() {
     });
 }
 
+var addEven = function() {
+    return Formi(add, Formi(even, arguments));
+}
+
 Formi.chain(1, 2, 3, 4)
     .pipe(even)
     .pipe(add)
     .value(); // ==&gt; 6
 </code></pre>
 <h4>Composite Functions</h4>
-<p>In simple chains like above, it might make more sense to create a composite functions.</p><pre><code class="lang-js">var addEven = function() {
+<p>In simple chains like above, it might make sense to create a composite functions using Formi.</p><pre><code class="lang-js">var addEven = function() {
     return Formi(add, Formi(even, arguments));
 }
 

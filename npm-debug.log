@@ -1,0 +1,26 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'run', 'develop' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose run-script [ 'predevelop', 'develop', 'postdevelop' ]
+5 info predevelop formi@0.1.0
+6 info develop formi@0.1.0
+7 verbose unsafe-perm in lifecycle true
+8 info formi@0.1.0 Failed to exec develop script
+9 error formi@0.1.0 develop: `gulp develop`
+9 error Exit status 1
+10 error Failed at the formi@0.1.0 develop script.
+10 error This is most likely a problem with the formi package,
+10 error not with npm itself.
+10 error Tell the author that this fails on your system:
+10 error     gulp develop
+10 error You can get their info via:
+10 error     npm owner ls formi
+10 error There is likely additional logging output above.
+11 error System Darwin 14.0.0
+12 error command "node" "/usr/local/bin/npm" "run" "develop"
+13 error cwd /Users/evan/Sites/il7/github/formi
+14 error node -v v0.10.32
+15 error npm -v 1.4.28
+16 error code ELIFECYCLE
+17 verbose exit [ 1, true ]

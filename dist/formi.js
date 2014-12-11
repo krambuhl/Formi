@@ -49,23 +49,28 @@ function construct(ctor, args) {
  * If function is undefined, an identity function is used instead
  *
  * @param  {Function}  Function takes data and returns data
- * @param  {Arguments} Arguments applied to function
+ * @param  {List} Arguments applied to function
  *
- * @return {Value} Value
+ * @return {List} Value
  */
 
-function Formi(func, dat) {
+function Formi(func, data) {
+  var args = slice(arguments, 0);
+
   // retrieve all possible data stuffs
-  var args = slice(arguments, 1),
-    data = slice(dat);
-  
+  if (!(func !== undefined && typeof func !== 'function')) {
+    args = slice(arguments, 1);
+  }
+
   // data is always sent as a list
-  if (!Array.isArray(data) || args.length > 1) {
+  if (!Array.isArray(args[0]) || args.length > 1) {
     data = args;
-  } 
+  } else {
+    data = args[0];
+  }
 
   // default to Identity if no function is defined
-  if (func === undefined || typeof(func) !== 'function') {
+  if (func === undefined || typeof func !== 'function') {
     func = Formi.identity;
   }
 
@@ -85,14 +90,11 @@ function Formi(func, dat) {
  *
  * Returns all passed arguments unmodified.  Usually used internally.
  *
- * @param  {Function}  Function takes data and returns data
- * @param  {Arguments} Arguments applied to function
- *
- * @return {Value} Value
+ * @return {List} Arguments values passed to identity.
  */
 
  Formi.identity = function() {
-  return arguments;
+  return slice(arguments);
 };
 /**
  * __Formi.chain(args...)__

@@ -90,7 +90,7 @@
             <h1>Formi</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">function</div><span>Formi()</span> -><span>Value</span>
+              <div class="label label-info radius ctx-type">function</div><span>Formi()</span> -><span>List</span>
             </p>
           </section>
           <table class="table table-bordered table-striped">
@@ -109,24 +109,29 @@
               </tr>
               <tr>
                 <td>Arguments</td>
-                <td>Arguments</td>
+                <td>List</td>
                 <td>applied to function </td>
               </tr>
             </tbody>
           </table>
           <div class="description"><p><strong>Formi(func, args...)</strong></p><p>Runs a function with provided arguments<br />If function is undefined, an identity function is used instead</p> </div>
-          <pre><code class="language-javascript">function Formi(func, dat) {
+          <pre><code class="language-javascript">function Formi(func, data) {
+  var args = slice(arguments, 0);
+
   // retrieve all possible data stuffs
-  var args = slice(arguments, 1),
-    data = slice(dat);
-  
+  if (!(func !== undefined &amp;&amp; typeof func !== 'function')) {
+    args = slice(arguments, 1);
+  }
+
   // data is always sent as a list
-  if (!Array.isArray(data) || args.length &gt; 1) {
+  if (!Array.isArray(args[0]) || args.length &gt; 1) {
     data = args;
-  } 
+  } else {
+    data = args[0];
+  }
 
   // default to Identity if no function is defined
-  if (func === undefined || typeof(func) !== 'function') {
+  if (func === undefined || typeof func !== 'function') {
     func = Formi.identity;
   }
 
