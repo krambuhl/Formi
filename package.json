@@ -6,7 +6,7 @@
   "scripts": {
     "develop": "gulp develop",
     "build": "gulp build",
-    "test": "gulp test",
+    "test": "karma start",
     "docs": "doxx -s source -T docs -t \"Formi\""
   },
   "repository": {

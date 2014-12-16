@@ -7,5 +7,11 @@
  */
 
 Formi.identity = function() {
-  return slice(arguments);
+  if (arguments.length === 1) {
+    return arguments[0];
+  } else if (arguments.length === 0) {
+    return undefined;
+  }
+
+  return arguments;
 };

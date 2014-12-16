@@ -14,20 +14,8 @@
  * @return {List} Value
  */
 
-function Formi(func, data) {
-  var args = slice(arguments, 0);
-
-  // retrieve all possible data stuffs
-  if (!(func !== undefined && typeof func !== 'function')) {
-    args = slice(arguments, 1);
-  }
-
-  // data is always sent as a list
-  if (!Array.isArray(args[0]) || args.length > 1) {
-    data = args;
-  } else {
-    data = args[0];
-  }
+function Formi(func) {
+  var offset = func !== undefined && typeof func !== 'function' ? 0 : 1;
 
   // default to Identity if no function is defined
   if (func === undefined || typeof func !== 'function') {
@@ -35,7 +23,7 @@ function Formi(func, data) {
   }
 
   // return function & argument result
-  return func.apply(undefined, data);
+  return func.apply(undefined, normalize(arguments, offset));
 }
 
 //=include("./version.js")

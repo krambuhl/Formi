@@ -84,6 +84,8 @@
               </li>
               <li><a href="#construct"><i class="alert alert-info"></i><span>construct</span></a>
               </li>
+              <li><a href="#normalize"><i class="alert alert-info"></i><span>normalize</span></a>
+              </li>
             </ul>
           </div>
         </div>
@@ -160,6 +162,49 @@
   }
   F.prototype = ctor.prototype;
   return new F();
+}</code></pre>
+          <section id="normalize">
+            <h1>normalize</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>normalize()</span> -><span>List</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Arguments</td>
+                <td>Array</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Offset</td>
+                <td>Integer</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p><strong>normalize</strong></p><p>Normalize arguments structure</p> </div>
+          <pre><code class="language-javascript">function normalize(argumts, offset) {
+  var args = slice(argumts, offset);
+
+  // data is always sent as a list
+  if (args.length === 1) {
+    if (Array.isArray(args[0])) {
+      return args[0];
+    } else {
+      return [args[0]];
+    }
+  } else {
+    return args;
+  }
 }</code></pre>
         </div>
       </div>

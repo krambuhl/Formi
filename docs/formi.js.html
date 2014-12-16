@@ -115,20 +115,8 @@
             </tbody>
           </table>
           <div class="description"><p><strong>Formi(func, args...)</strong></p><p>Runs a function with provided arguments<br />If function is undefined, an identity function is used instead</p> </div>
-          <pre><code class="language-javascript">function Formi(func, data) {
-  var args = slice(arguments, 0);
-
-  // retrieve all possible data stuffs
-  if (!(func !== undefined &amp;&amp; typeof func !== 'function')) {
-    args = slice(arguments, 1);
-  }
-
-  // data is always sent as a list
-  if (!Array.isArray(args[0]) || args.length &gt; 1) {
-    data = args;
-  } else {
-    data = args[0];
-  }
+          <pre><code class="language-javascript">function Formi(func) {
+  var offset = func !== undefined &amp;&amp; typeof func !== 'function' ? 0 : 1;
 
   // default to Identity if no function is defined
   if (func === undefined || typeof func !== 'function') {
@@ -136,7 +124,7 @@
   }
 
   // return function &amp; argument result
-  return func.apply(undefined, data);
+  return func.apply(undefined, normalize(arguments, offset));
 }
 
 //=include(&quot;./version.js&quot;)

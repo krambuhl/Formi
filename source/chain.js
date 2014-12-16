@@ -9,8 +9,6 @@
  */
 
 Formi.chain = function() {
-  var data;
-
   // return chain if data is a chain instance
   if (arguments[0] instanceof Formi.chain) {
     return arguments[0];
@@ -21,17 +19,8 @@ Formi.chain = function() {
     return construct(Formi.chain, arguments);
   }
 
-  var args = slice(arguments);
-
-  // data is always sent as a list
-  if (Array.isArray(args[0]) && args.length === 1) {
-    data = args[0];
-  } else {
-    data = args;
-  }
-
   // define public property for data in transit
-  this.data = data;
+  this.data = normalize(arguments);
 
   return this;
 };

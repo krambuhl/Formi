@@ -30,3 +30,29 @@ function construct(ctor, args) {
   F.prototype = ctor.prototype;
   return new F();
 }
+
+
+/**
+ * __normalize__
+ *
+ * Normalize arguments structure
+ *
+ * @param  {Array} Arguments
+ * @param  {Integer} Offset
+ * @return {List} Argument list of arguments
+ */
+
+function normalize(argumts, offset) {
+  var args = slice(argumts, offset);
+
+  // data is always sent as a list
+  if (args.length === 1) {
+    if (Array.isArray(args[0])) {
+      return args[0];
+    } else {
+      return [args[0]];
+    }
+  } else {
+    return args;
+  }
+}

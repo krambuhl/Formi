@@ -42,6 +42,32 @@ function construct(ctor, args) {
   return new F();
 }
 
+
+/**
+ * __normalize__
+ *
+ * Normalize arguments structure
+ *
+ * @param  {Array} Arguments
+ * @param  {Integer} Offset
+ * @return {List} Argument list of arguments
+ */
+
+function normalize(argumts, offset) {
+  var args = slice(argumts, offset);
+
+  // data is always sent as a list
+  if (args.length === 1) {
+    if (Array.isArray(args[0])) {
+      return args[0];
+    } else {
+      return [args[0]];
+    }
+  } else {
+    return args;
+  }
+}
+
 /**
  * __Formi(func, args...)__
  *
@@ -54,20 +80,8 @@ function construct(ctor, args) {
  * @return {List} Value
  */
 
-function Formi(func, data) {
-  var args = slice(arguments, 0);
-
-  // retrieve all possible data stuffs
-  if (!(func !== undefined && typeof func !== 'function')) {
-    args = slice(arguments, 1);
-  }
-
-  // data is always sent as a list
-  if (!Array.isArray(args[0]) || args.length > 1) {
-    data = args;
-  } else {
-    data = args[0];
-  }
+function Formi(func) {
+  var offset = func !== undefined && typeof func !== 'function' ? 0 : 1;
 
   // default to Identity if no function is defined
   if (func === undefined || typeof func !== 'function') {
@@ -75,7 +89,7 @@ function Formi(func, data) {
   }
 
   // return function & argument result
-  return func.apply(undefined, data);
+  return func.apply(undefined, normalize(arguments, offset));
 }
 
 /**
@@ -94,7 +108,13 @@ function Formi(func, data) {
  */
 
 Formi.identity = function() {
-  return slice(arguments);
+  if (arguments.length === 1) {
+    return arguments[0];
+  } else if (arguments.length === 0) {
+    return undefined;
+  }
+
+  return arguments;
 };
 /**
  * __Formi.chain(args...)__
@@ -107,8 +127,6 @@ Formi.identity = function() {
  */
 
 Formi.chain = function() {
-  var data;
-
   // return chain if data is a chain instance
   if (arguments[0] instanceof Formi.chain) {
     return arguments[0];
@@ -119,17 +137,8 @@ Formi.chain = function() {
     return construct(Formi.chain, arguments);
   }
 
-  var args = slice(arguments);
-
-  // data is always sent as a list
-  if (Array.isArray(args[0]) && args.length === 1) {
-    data = args[0];
-  } else {
-    data = args;
-  }
-
   // define public property for data in transit
-  this.data = data;
+  this.data = normalize(arguments);
 
   return this;
 };
