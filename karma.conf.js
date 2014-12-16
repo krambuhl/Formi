@@ -28,6 +28,6 @@ module.exports = function(config) {
     port: 9876,
     logLevel: config.LOG_INFO,
     colors: true,
-    singleRun: false
+    singleRun: true
   });
 };
