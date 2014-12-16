@@ -37,7 +37,7 @@ Formi.chain = function() {
 
 Formi.chain.prototype.pipe = function(func) {
   // pass Formi return back to data and return the chain
-  this.data = Formi(func, this.data);
+  this.data = Formi(func, [this.data]);
   return this;
 };
 

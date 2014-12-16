@@ -7,7 +7,9 @@
     "develop": "gulp develop",
     "build": "gulp build",
     "test": "gulp test",
-    "docs": "doxx -s source -T docs -t \"Formi\""
+    "docs": "doxx -s source -T docs -t \"Formi\"",
+    "ci-test": "./node_modules/karma/bin/karma start --single-run true && npm run ci-climate",
+    "ci-climate": "mv coverage/*/lcov.info coverage && codeclimate < coverage/lcov.info"
   },
   "repository": {
     "type": "git",

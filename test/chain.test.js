@@ -64,14 +64,14 @@
 //   });
 // });
 
-// suite('Formi.chain().pipe()', function() {
-//   test('#Formi.chain().pipe()', function() {
-//     var chain = Formi.chain(10);
-//     chain.pipe().value()[0].should.equal(10);
-//   });
+// // suite('Formi.chain().pipe()', function() {
+// //   test('#Formi.chain().pipe()', function() {
+// //     var chain = Formi.chain(10);
+// //     chain.pipe().value()[0].should.equal(10);
+// //   });
 
-//   test('#Formi.chain().pipe(Function)', function() {
-//     var chain = Formi.chain(true);
-//     chain.pipe(not).value().should.equal(false);
-//   });
-// });
+// //   test('#Formi.chain().pipe(Function)', function() {
+// //     var chain = Formi.chain(true);
+// //     chain.pipe(not).value().should.equal(false);
+// //   });
+// // });

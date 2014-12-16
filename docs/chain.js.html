@@ -156,7 +156,7 @@
           <div class="description"><p><strong>Formi.chain().pipe(function)</strong></p><p>Transform chained data with function and returns chain</p> </div>
           <pre><code class="language-javascript">Formi.chain.prototype.pipe = function(func) {
   // pass Formi return back to data and return the chain
-  this.data = Formi(func, this.data);
+  this.data = Formi(func, [this.data]);
   return this;
 };</code></pre>
           <section id="value">
