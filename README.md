@@ -3,6 +3,12 @@ Formi
 
 Functional API.
 
+###Status
+
+[![Codeship](https://codeship.com/projects/2b973c80-6323-0132-0a27-4ad47cf4b99f/status?branch=develop)](https://codeship.com/projects/52245)
+[![Code Climate](https://codeclimate.com/github/krambuhl/Formi/badges/gpa.svg)](https://codeclimate.com/github/krambuhl/Formi)
+[![Test Coverage](https://codeclimate.com/github/krambuhl/Formi/badges/coverage.svg)](https://codeclimate.com/github/krambuhl/Formi)
+
 
 API
 ---
