@@ -20,6 +20,14 @@ suite('Formi.chain()', function() {
     (chain.data === undefined).should.be.equal(true);
   });
 
+  test('#Formi.chain(chain)', function() {
+    var chain1 = Formi.chain(10, 20);
+    var chain2 = Formi.chain(chain1);
+
+    chain2.value()[0].should.equal(10);
+    chain2.value()[1].should.equal(20);
+  });
+
   test('#Formi.chain().value()', function() {
     var data = Formi.chain().value();
     (data === undefined).should.be.equal(true);
@@ -65,9 +73,17 @@ suite('Formi.chain()', function() {
 });
 
 suite('Formi.chain().pipe()', function() {
-  test('#Formi.chain().pipe()', function() {
+  test('#Formi.chain(Num).pipe()', function() {
     var chain = Formi.chain(10);
     chain.pipe().value().should.equal(10);
+  });
+
+  test('#Formi.chain(Array).pipe()', function() {
+    var chain = Formi.chain(1, 2, 3, 4);
+    chain.value()[0].should.equal(1);
+    chain.value()[1].should.equal(2);
+    chain.value()[2].should.equal(3);
+    chain.value()[3].should.equal(4);
   });
 
   test('#Formi.chain().pipe(Function)', function() {
