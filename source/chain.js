@@ -5,7 +5,7 @@
  * Provides an API for applying transforms and return values.
  *
  * @param   {Arguments}  Arguments
- * @return  {Instance} Array
+ * @return  {Instance} Instance
  */
 
 Formi.chain = function() {
@@ -20,7 +20,7 @@ Formi.chain = function() {
   }
 
   // define public property for data in transit
-  this.data = normalize(arguments);
+  this.data = normalize(arguments, 0, true);
 
   return this;
 };
@@ -37,7 +37,17 @@ Formi.chain = function() {
 
 Formi.chain.prototype.pipe = function(func) {
   // pass Formi return back to data and return the chain
-  this.data = Formi(func, [this.data]);
+  var args;
+
+  if (typeof func === 'function') {
+    args = [func].concat(this.data);
+  } else if (Array.isArray(this.data)) {
+    args = this.data;
+  } else {
+    args = [this.data];
+  }
+
+  this.data = Formi.apply(undefined, args);
   return this;
 };
 

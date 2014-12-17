@@ -53,12 +53,18 @@ function construct(ctor, args) {
  * @return {List} Argument list of arguments
  */
 
-function normalize(argumts, offset) {
-  var args = slice(argumts, offset);
+function normalize(argumts, offset, chaining) {
+  var args;
+
+  if (argumts.length > 0) {
+    args = slice(argumts, offset);
+  } else {
+    return undefined;
+  }
 
   // data is always sent as a list
   if (args.length === 1) {
-    if (Array.isArray(args[0])) {
+    if (Array.isArray(args[0]) || chaining) {
       return args[0];
     } else {
       return [args[0]];
@@ -123,7 +129,7 @@ Formi.identity = function() {
  * Provides an API for applying transforms and return values.
  *
  * @param   {Arguments}  Arguments
- * @return  {Instance} Array
+ * @return  {Instance} Instance
  */
 
 Formi.chain = function() {
@@ -138,7 +144,7 @@ Formi.chain = function() {
   }
 
   // define public property for data in transit
-  this.data = normalize(arguments);
+  this.data = normalize(arguments, 0, true);
 
   return this;
 };
@@ -155,7 +161,17 @@ Formi.chain = function() {
 
 Formi.chain.prototype.pipe = function(func) {
   // pass Formi return back to data and return the chain
-  this.data = Formi(func, [this.data]);
+  var args;
+
+  if (typeof func === 'function') {
+    args = [func].concat(this.data);
+  } else if (Array.isArray(this.data)) {
+    args = this.data;
+  } else {
+    args = [this.data];
+  }
+
+  this.data = Formi.apply(undefined, args);
   return this;
 };
 

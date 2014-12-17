@@ -42,12 +42,18 @@ function construct(ctor, args) {
  * @return {List} Argument list of arguments
  */
 
-function normalize(argumts, offset) {
-  var args = slice(argumts, offset);
+function normalize(argumts, offset, chaining) {
+  var args;
+
+  if (argumts.length > 0) {
+    args = slice(argumts, offset);
+  } else {
+    return undefined;
+  }
 
   // data is always sent as a list
   if (args.length === 1) {
-    if (Array.isArray(args[0])) {
+    if (Array.isArray(args[0]) || chaining) {
       return args[0];
     } else {
       return [args[0]];

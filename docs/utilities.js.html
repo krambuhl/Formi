@@ -192,12 +192,18 @@
             </tbody>
           </table>
           <div class="description"><p><strong>normalize</strong></p><p>Normalize arguments structure</p> </div>
-          <pre><code class="language-javascript">function normalize(argumts, offset) {
-  var args = slice(argumts, offset);
+          <pre><code class="language-javascript">function normalize(argumts, offset, chaining) {
+  var args;
+
+  if (argumts.length &gt; 0) {
+    args = slice(argumts, offset);
+  } else {
+    return undefined;
+  }
 
   // data is always sent as a list
   if (args.length === 1) {
-    if (Array.isArray(args[0])) {
+    if (Array.isArray(args[0]) || chaining) {
       return args[0];
     } else {
       return [args[0]];
