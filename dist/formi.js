@@ -165,10 +165,12 @@ Formi.chain.prototype.pipe = function(func) {
 
   if (typeof func === 'function') {
     args = [func].concat(this.data);
-  } else if (Array.isArray(this.data)) {
-    args = this.data;
   } else {
-    args = [this.data];
+    if (Array.isArray(this.data)) {
+      args = this.data;
+    } else {
+      args = [this.data];
+    }
   }
 
   this.data = Formi.apply(undefined, args);
