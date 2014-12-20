@@ -95,7 +95,14 @@ function Formi(func) {
   }
 
   // return function & argument result
-  return func.apply(undefined, normalize(arguments, offset));
+  var result = func.apply(undefined, normalize(arguments, offset));
+
+  // slice result
+  if (result && result.length && !(typeof result == 'string' || result instanceof String)) {
+    return slice(result);
+  }
+
+  return result;
 }
 
 /**
@@ -161,18 +168,7 @@ Formi.chain = function() {
 
 Formi.chain.prototype.pipe = function(func) {
   // pass Formi return back to data and return the chain
-  var args;
-
-  if (typeof func === 'function') {
-    args = [func].concat(this.data);
-  } else {
-    if (Array.isArray(this.data)) {
-      args = this.data;
-    } else {
-      args = [this.data];
-    }
-  }
-
+  var args = typeof func === 'function' ? [func, this.data] : [this.data]; 
   this.data = Formi.apply(undefined, args);
   return this;
 };

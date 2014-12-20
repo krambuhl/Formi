@@ -23,7 +23,14 @@ function Formi(func) {
   }
 
   // return function & argument result
-  return func.apply(undefined, normalize(arguments, offset));
+  var result = func.apply(undefined, normalize(arguments, offset));
+
+  // slice result
+  if (result && result.length && !(typeof result == 'string' || result instanceof String)) {
+    return slice(result);
+  }
+
+  return result;
 }
 
 //=include("./version.js")
