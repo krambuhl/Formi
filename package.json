@@ -1,5 +1,5 @@
 {
-  "name": "Formi",
+  "name": "formi",
   "version": "0.2.0",
   "description": "Functional Programming API",
   "main": "dist/formi.js",
