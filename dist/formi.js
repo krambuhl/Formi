@@ -111,7 +111,7 @@ function Formi(func) {
  * Keep track of version tied to `package.json`
  */
 
- Formi.version = '0.2.0';
+ Formi.version = '0.2.2';
 /**
  * __Formi.identity(func, args...)__
  *
