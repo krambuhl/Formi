@@ -1,51 +1,89 @@
 Formi
 === 
 
-Functional compositions.
+Functional Programming API.
+
+###Status
+
+[![Codeship](https://codeship.com/projects/2b973c80-6323-0132-0a27-4ad47cf4b99f/status?branch=develop)](https://codeship.com/projects/52245)
+
+[![Code Climate](https://codeclimate.com/github/krambuhl/Formi/badges/gpa.svg)](https://codeclimate.com/github/krambuhl/Formi)
+
+[![Test Coverage](https://codeclimate.com/github/krambuhl/Formi/badges/coverage.svg)](https://codeclimate.com/github/krambuhl/Formi)
 
 
 API
 ---
 
-```js
-F(method, [args...])
-Formi(method, [args...])
-```
+Formi exposes the `Formi` function.
 
-#####Static Methods
+###Formi(function, args)
 
-Formi.addMethod(name, func);
-Formi.chain([args...]).method(name).value();
-
+__Example__
 
 ```js
-
-Formi.addMethod('not', function(val) {
+// define predicate function
+var not = function(val) {
     return !val;
-});
+};
 
-Formi.addMethod('and', function() {
-    return _.every(arguments);
-});
-
-Formi.addMethod('or', function() {
+var or = function() {
     return _.some(arguments);
-});
+};
 
-Formi.addMethod('add', function() {
-    return _.reduce(arguments, function(total, val) {
-        return total + val;    
-    }, 0);
-});
-
-
-Formi('not', true) // ==> false
-Formi('and', false, true) // ==> false
-Formi('or', true, true) // ==> true
-Formi('add', 1, 2, 3) // ==> 6
-
-
-var nor = F('not', F('or', true, false));
-var nor = Fo.chain(true, false).or().not().get();
-
+Formi(not, true) // ==> false
+Formi(or, false, false) // ==> false
+Formi(or, false, true, false) // ==> true
 ```
+
+###Formi.chain(args...)
+
+Creates a chain for transforming data.
+
+__Example__
+
+```js
+var add = function() {
+    return _.reduce(arguments, function(total, num) {
+        return total + num;
+    }, 0)
+}
+
+var even = function() {
+    return _.filter(arguments, function(val) {
+        return val % 2 === 0;
+    });
+}
+
+Formi.chain(1, 2, 3, 4)
+    .pipe(even)
+    .pipe(add)
+    .value(); // ==> 6
+```
+
+####Formi.chain().pipe(func)
+
+Define function used to transform wrapped data.
+
+####Formi.chain().value();
+
+Return wrapped data
+
+
+###Composite Functions
+
+In simple chains like above, it might make sense to create a composite functions using Formi.
+
+```js
+var addEven = function() {
+    return Formi.chain(arguments)
+        .pipe(even)
+        .pipe(add)
+        .value();
+}
+
+Formi(addEven, 1, 2, 3, 4) // ==> 6
+```
+
+
+

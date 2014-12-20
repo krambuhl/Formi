@@ -72,9 +72,11 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
+            <li><a href="chain.js.html">chain.js</a></li>
             <li class="active"><a href="formi.js.html">formi.js</a></li>
-            <li><a href="formi.proto.js.html">formi.proto.js</a></li>
+            <li><a href="identity.js.html">identity.js</a></li>
             <li><a href="utilities.js.html">utilities.js</a></li>
+            <li><a href="version.js.html">version.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
@@ -88,15 +90,53 @@
             <h1>Formi</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">function</div><span>Formi()</span>
+              <div class="label label-info radius ctx-type">function</div><span>Formi()</span> -><span>List</span>
             </p>
           </section>
-          <div class="description"><p><strong>Formi(func)</strong></p> </div>
-          <pre><code class="language-javascript">var Formi = function(method, values) {};
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Function</td>
+                <td>Function</td>
+                <td>takes data and returns data</td>
+              </tr>
+              <tr>
+                <td>Arguments</td>
+                <td>List</td>
+                <td>applied to function </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p><strong>Formi(func, args...)</strong></p><p>Runs a function with provided arguments<br />If function is undefined, an identity function is used instead</p> </div>
+          <pre><code class="language-javascript">function Formi(func) {
+  var offset = func !== undefined &amp;&amp; typeof func !== 'function' ? 0 : 1;
 
-//=include(&quot;./formi.proto.js&quot;)
-//=include(&quot;./static.addMethod.js&quot;)
-//=include(&quot;./static.chain.js&quot;)</code></pre>
+  // default to Identity if no function is defined
+  if (func === undefined || typeof func !== 'function') {
+    func = Formi.identity;
+  }
+
+  // return function &amp; argument result
+  var result = func.apply(undefined, normalize(arguments, offset));
+
+  // slice result
+  if (result &amp;&amp; result.length &amp;&amp; !(typeof result === 'string' || result instanceof String)) {
+    return slice(result);
+  }
+
+  return result;
+}
+
+//=include(&quot;./version.js&quot;)
+//=include(&quot;./identity.js&quot;)
+//=include(&quot;./chain.js&quot;)</code></pre>
         </div>
       </div>
     </div>

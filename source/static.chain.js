@@ -1,3 +1,0 @@
-Formi.chain = function() {
-  
-};

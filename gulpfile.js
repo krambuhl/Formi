@@ -50,22 +50,15 @@ gulp.task('compile', function() {
   return gulp.src(path.join(dir.src, file.full))
     .pipe(sourcemaps.init())
     .pipe(fileinclude('//='))
-    .pipe(preprocess({
-      context: { 
-        VERSION: pkg.version
-      }
-    }))
-    .pipe(umd({
-      dependencies: function() {
-        return [];
-      }
-    }))
+    .pipe(preprocess({ context: pkg }))
+    .pipe(umd())
     .pipe(gulp.dest(dir.dist))
     .pipe(uglify())
     .pipe(rename(file.min))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(dir.dist));
 });
+
 
 gulp.task('docs', function(done) {
   exec('npm run docs', function (err) {
@@ -120,7 +113,7 @@ gulp.task('build', function(done) {
 });
 
 gulp.task('develop', function(done) {
-  sequence('build', 'test', 'watch', done);
+  sequence('build', 'watch', done);
 });
 
 gulp.task('default', ['build']);

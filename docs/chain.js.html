@@ -72,29 +72,29 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
-            <li><a href="chain.js.html">chain.js</a></li>
+            <li class="active"><a href="chain.js.html">chain.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
             <li><a href="identity.js.html">identity.js</a></li>
-            <li class="active"><a href="utilities.js.html">utilities.js</a></li>
+            <li><a href="utilities.js.html">utilities.js</a></li>
             <li><a href="version.js.html">version.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#slice"><i class="alert alert-info"></i><span>slice</span></a>
+              <li><a href="#chain"><i class="alert alert-info"></i><span>chain</span></a>
               </li>
-              <li><a href="#construct"><i class="alert alert-info"></i><span>construct</span></a>
+              <li><a href="#pipe"><i class="alert alert-info"></i><span>pipe</span></a>
               </li>
-              <li><a href="#normalize"><i class="alert alert-info"></i><span>normalize</span></a>
+              <li><a href="#value"><i class="alert alert-info"></i><span>value</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="slice">
-            <h1>slice</h1>
+          <section id="chain">
+            <h1>chain</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">function</div><span>slice()</span> -><span>Array</span>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.chain()</span> -><span>Instance</span>
             </p>
           </section>
           <table class="table table-bordered table-striped">
@@ -108,30 +108,33 @@
             <tbody>
               <tr>
                 <td>Arguments</td>
-                <td>Array</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Begin</td>
-                <td>Integer</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>End</td>
-                <td>Integer</td>
+                <td>Arguments</td>
                 <td></td>
               </tr>
             </tbody>
           </table>
-          <div class="description"><p><strong>slice(args, offset)</strong></p><p>Converts arguments to array</p> </div>
-          <pre><code class="language-javascript">function slice(args, begin, end) {
-  return Array.prototype.slice.call(args, begin, end);
-}</code></pre>
-          <section id="construct">
-            <h1>construct</h1>
+          <div class="description"><p><strong>Formi.chain(args...)</strong></p><p>Returns a chainable instance for transforming data.<br />Provides an API for applying transforms and return values.</p> </div>
+          <pre><code class="language-javascript">Formi.chain = function() {
+  // return chain if data is a chain instance
+  if (arguments[0] instanceof Formi.chain) {
+    return arguments[0];
+  }
+
+  // call constructor if called without `new`
+  if (!(this instanceof Formi.chain)) {
+    return construct(Formi.chain, arguments);
+  }
+
+  // define public property for data in transit
+  this.data = normalize(arguments, 0, true);
+
+  return this;
+};</code></pre>
+          <section id="pipe">
+            <h1>pipe</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">function</div><span>construct()</span> -><span>Instance</span>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.chain.prototype.pipe()</span> -><span>Formi.Chain</span>
             </p>
           </section>
           <table class="table table-bordered table-striped">
@@ -144,74 +147,31 @@
             </thead>
             <tbody>
               <tr>
-                <td>Constructor</td>
                 <td>Function</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Arguments</td>
-                <td>Array</td>
-                <td></td>
+                <td>Function</td>
+                <td>Data transform function</td>
               </tr>
             </tbody>
           </table>
-          <div class="description"><p><strong>construct</strong></p><p>Constructs new instance with a variable number of arguments</p> </div>
-          <pre><code class="language-javascript">function construct(ctor, args) {
-  function F() {
-    return ctor.apply(this, args);
-  }
-  F.prototype = ctor.prototype;
-  return new F();
-}</code></pre>
-          <section id="normalize">
-            <h1>normalize</h1>
+          <div class="description"><p><strong>Formi.chain().pipe(function)</strong></p><p>Transform chained data with function and returns chain</p> </div>
+          <pre><code class="language-javascript">Formi.chain.prototype.pipe = function(func) {
+  // pass Formi return back to data and return the chain
+  var args = typeof func === 'function' ? [func, this.data] : [this.data]; 
+  this.data = Formi.apply(undefined, args);
+  return this;
+};</code></pre>
+          <section id="value">
+            <h1>value</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">function</div><span>normalize()</span> -><span>List</span>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.chain.prototype.value()</span> -><span>Value</span>
             </p>
           </section>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th style="width:20%">Option name</th>
-                <th style="width:20%">Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Arguments</td>
-                <td>Array</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Offset</td>
-                <td>Integer</td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="description"><p><strong>normalize</strong></p><p>Normalize arguments structure</p> </div>
-          <pre><code class="language-javascript">function normalize(argumts, offset, chaining) {
-  var args;
-
-  if (argumts.length &gt; 0) {
-    args = slice(argumts, offset);
-  } else {
-    return undefined;
-  }
-
-  // data is always sent as a list
-  if (args.length === 1) {
-    if (Array.isArray(args[0]) || chaining) {
-      return args[0];
-    } else {
-      return [args[0]];
-    }
-  } else {
-    return args;
-  }
-}</code></pre>
+          <div class="description"><p><strong>Formi.chain().value()</strong></p><p>Returns a copy of chained data.</p> </div>
+          <pre><code class="language-javascript">Formi.chain.prototype.value = function() {
+  // exports data out of chain
+  return this.data;
+};</code></pre>
         </div>
       </div>
     </div>

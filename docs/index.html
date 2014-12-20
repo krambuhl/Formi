@@ -72,9 +72,11 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li class="active"><a href="index.html">Main</a></li>
+            <li><a href="chain.js.html">chain.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
-            <li><a href="formi.proto.js.html">formi.proto.js</a></li>
+            <li><a href="identity.js.html">identity.js</a></li>
             <li><a href="utilities.js.html">utilities.js</a></li>
+            <li><a href="version.js.html">version.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
@@ -83,39 +85,51 @@
         </div>
         <div class="span9">
           <section id="Main"><h1>Formi</h1>
-<p>Functional compositions.</p><h2>API</h2>
-<pre><code class="lang-js">F(method, [args...])
-Formi(method, [args...])
-</code></pre>
-<h5>Add Method</h5>
-<p>Formi.addMethod(name, func);</p><pre><code class="lang-js">
-Formi.addMethod(&#39;not&#39;, function(val) {
+<p>Functional Programming API.</p><h3>Status</h3>
+<p><a href="https://codeship.com/projects/52245"><img src="https://codeship.com/projects/2b973c80-6323-0132-0a27-4ad47cf4b99f/status?branch=develop" alt="Codeship"></a></p><p><a href="https://codeclimate.com/github/krambuhl/Formi"><img src="https://codeclimate.com/github/krambuhl/Formi/badges/gpa.svg" alt="Code Climate"></a></p><p><a href="https://codeclimate.com/github/krambuhl/Formi"><img src="https://codeclimate.com/github/krambuhl/Formi/badges/coverage.svg" alt="Test Coverage"></a></p><h2>API</h2>
+<p>Formi exposes the <code>Formi</code> function.</p><h3>Formi(function, args)</h3>
+<p><strong>Example</strong></p><pre><code class="lang-js">// define predicate function
+var not = function(val) {
     return !val;
-});
+};
 
-Formi.addMethod(&#39;and&#39;, function() {
-    return _.every(arguments);
-});
-
-Formi.addMethod(&#39;or&#39;, function() {
+var or = function() {
     return _.some(arguments);
-});
+};
 
-Formi.addMethod(&#39;add&#39;, function() {
-    return _.reduce(arguments, function(total, val) {
-        return total + val;    
-    }, 0);
-});
+Formi(not, true) // ==&gt; false
+Formi(or, false, false) // ==&gt; false
+Formi(or, false, true, false) // ==&gt; true
+</code></pre>
+<h3>Formi.chain(args...)</h3>
+<p>Creates a chain for transforming data.</p><p><strong>Example</strong></p><pre><code class="lang-js">var add = function() {
+    return _.reduce(arguments, function(total, num) {
+        return total + num;
+    }, 0)
+}
 
+var even = function() {
+    return _.filter(arguments, function(val) {
+        return val % 2 === 0;
+    });
+}
 
-Formi(&#39;not&#39;, true) // ==&gt; false
-Formi(&#39;and&#39;, false, true) // ==&gt; false
-Formi(&#39;or&#39;, true, true) // ==&gt; true
-Formi(&#39;add&#39;, 1, 2, 3) // ==&gt; 6
+Formi.chain(1, 2, 3, 4)
+    .pipe(even)
+    .pipe(add)
+    .value(); // ==&gt; 6
+</code></pre>
+<h4>Formi.chain().pipe(func)</h4>
+<p>Define function used to transform wrapped data.</p><h4>Formi.chain().value();</h4>
+<p>Return wrapped data</p><h3>Composite Functions</h3>
+<p>In simple chains like above, it might make sense to create a composite functions using Formi.</p><pre><code class="lang-js">var addEven = function() {
+    return Formi.chain(arguments)
+        .pipe(even)
+        .pipe(add)
+        .value();
+}
 
-
-var nor = F(&#39;not&#39;, F(&#39;or&#39;, true, false));
-var nor = F.chain(true, false).or().not().get();
+Formi(addEven, 1, 2, 3, 4) // ==&gt; 6
 </code></pre>
 </section>
         </div>

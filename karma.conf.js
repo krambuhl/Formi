@@ -4,7 +4,7 @@ module.exports = function(config) {
     
     frameworks: ['mocha'],
     browsers: ['PhantomJS'],
-    reporters: ['progress', 'coverage'],
+    reporters: ['spec', 'progress', 'coverage'],
 
     preprocessors: { 'dist/formi.js': ['coverage'] },
 
@@ -17,14 +17,17 @@ module.exports = function(config) {
       'dist/formi.js',
       'test/**/*.js'
     ],
-    
-    exclude: [
-      'test/vendor/**/*'
-    ],
+
+    client: {
+      mocha: {
+        ui: 'tdd',
+        timeout: '5000'
+      }
+    },
 
     port: 9876,
     logLevel: config.LOG_INFO,
     colors: true,
-    singleRun: false
+    singleRun: true
   });
 };
