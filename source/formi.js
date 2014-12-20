@@ -26,7 +26,7 @@ function Formi(func) {
   var result = func.apply(undefined, normalize(arguments, offset));
 
   // slice result
-  if (result && result.length && !(typeof result == 'string' || result instanceof String)) {
+  if (result && result.length && !(typeof result === 'string' || result instanceof String)) {
     return slice(result);
   }
 
