@@ -70,11 +70,19 @@ Define function used to transform wrapped data.
 Return wrapped data
 
 
-###Composite Functions
+###Formi.compose(funcs...)
 
-In simple chains like above, it might make sense to create a composite functions using Formi.
+Defines a composite function from a series of argument functions.
+
+`f(g(h(arg))) === Formi.compose(h, g, f)(arg)`
+
+__Example__
+
+Both of these expamples define the same function.
 
 ```js
+var addEven = Formi.compose(even, add);
+
 var addEven = function() {
     return Formi.chain(arguments)
         .pipe(even)
@@ -82,8 +90,5 @@ var addEven = function() {
         .value();
 }
 
-Formi(addEven, 1, 2, 3, 4) // ==> 6
+Formi(addEven, 2, 3, 4, 5); //==> 6
 ```
-
-
-

@@ -121,15 +121,17 @@ Formi.chain(1, 2, 3, 4)
 </code></pre>
 <h4>Formi.chain().pipe(func)</h4>
 <p>Define function used to transform wrapped data.</p><h4>Formi.chain().value();</h4>
-<p>Return wrapped data</p><h3>Composite Functions</h3>
-<p>In simple chains like above, it might make sense to create a composite functions using Formi.</p><pre><code class="lang-js">var addEven = function() {
+<p>Return wrapped data</p><h3>Formi.compose(funcs...)</h3>
+<p>Defines a composite function from a series of argument functions.</p><p><code>f(g(h(arg))) === Formi.compose(h, g, f)(arg)</code></p><p><strong>Example</strong></p><p>Both of these expamples define the same function.</p><pre><code class="lang-js">var addEven = Formi.compose(even, add);
+
+var addEven = function() {
     return Formi.chain(arguments)
         .pipe(even)
         .pipe(add)
         .value();
 }
 
-Formi(addEven, 1, 2, 3, 4) // ==&gt; 6
+Formi(addEven, 2, 3, 4, 5); //==&gt; 6
 </code></pre>
 </section>
         </div>
