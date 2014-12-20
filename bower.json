@@ -1,6 +1,6 @@
 {
-  "name": "formi",
-  "version": "0.1.0",
+  "name": "Formi",
+  "version": "0.2.0",
   "homepage": "https://github.com/krambuhl/formi",
   "authors": [
     "Evan Krambuhl <thekrambuhl@gmail.com>"
@@ -13,9 +13,12 @@
     "test",
     "tests"
   ],
-  "description": "Functional conditions and compositions.",
+  "description": "Functional Programming API",
   "keywords": [
-    "composition"
+    "functional",
+    "functional programming",
+    "fp",
+    "lisp"
   ],
   "main": "dist/formi.js",
   "repository": {
