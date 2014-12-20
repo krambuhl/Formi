@@ -73,25 +73,25 @@
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
             <li><a href="chain.js.html">chain.js</a></li>
-            <li><a href="compose.js.html">compose.js</a></li>
-            <li class="active"><a href="formi.js.html">formi.js</a></li>
+            <li class="active"><a href="compose.js.html">compose.js</a></li>
+            <li><a href="formi.js.html">formi.js</a></li>
             <li><a href="identity.js.html">identity.js</a></li>
             <li><a href="utilities.js.html">utilities.js</a></li>
             <li><a href="version.js.html">version.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#Formi"><i class="alert alert-info"></i><span>Formi</span></a>
+              <li><a href="#compose"><i class="alert alert-info"></i><span>compose</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="Formi">
-            <h1>Formi</h1>
+          <section id="compose">
+            <h1>compose</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">function</div><span>Formi()</span> -><span>List</span>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.compose()</span> -><span>Function</span>
             </p>
           </section>
           <table class="table table-bordered table-striped">
@@ -104,41 +104,30 @@
             </thead>
             <tbody>
               <tr>
-                <td>Function</td>
-                <td>Function</td>
-                <td>takes data and returns data</td>
-              </tr>
-              <tr>
                 <td>Arguments</td>
-                <td>List</td>
-                <td>applied to function </td>
+                <td>Functions</td>
+                <td></td>
               </tr>
             </tbody>
           </table>
-          <div class="description"><p><strong>Formi(func, args...)</strong></p><p>Runs a function with provided arguments<br />If function is undefined, an identity function is used instead</p> </div>
-          <pre><code class="language-javascript">function Formi(func) {
-  var offset = func !== undefined &amp;&amp; typeof func !== 'function' ? 0 : 1;
+          <div class="description"><p><strong>Formi.compose(args...)</strong></p><p>Defines a composite function from a<br />series of argument functions.</p> </div>
+          <pre><code class="language-javascript">Formi.compose = function() {
+  var funcs = slice(arguments);
 
-  // default to Identity if no function is defined
-  if (func === undefined || typeof func !== 'function') {
-    func = Formi.identity;
+  if (Array.isArray(funcs[0])) {
+    funcs = funcs[0];
   }
 
-  // return function &amp; argument result
-  var result = func.apply(undefined, normalize(arguments, offset));
+  return function() {
+    var chain = Formi.chain.apply(undefined, arguments);
 
-  // slice result
-  if (result &amp;&amp; result.length &amp;&amp; !(typeof result === 'string' || result instanceof String)) {
-    return slice(result);
-  }
+    for (var i=0; i&lt;funcs.length; i++) {
+      chain.pipe(funcs[i]);
+    }
 
-  return result;
-}
-
-//=include(&quot;./version.js&quot;)
-//=include(&quot;./identity.js&quot;)
-//=include(&quot;./chain.js&quot;)
-//=include(&quot;./compose.js&quot;)</code></pre>
+    return chain.value();
+  };
+};</code></pre>
         </div>
       </div>
     </div>

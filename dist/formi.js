@@ -111,7 +111,7 @@ function Formi(func) {
  * Keep track of version tied to `package.json`
  */
 
- Formi.version = '0.2.2';
+ Formi.version = '0.3.0';
 /**
  * __Formi.identity(func, args...)__
  *
@@ -185,6 +185,33 @@ Formi.chain.prototype.pipe = function(func) {
 Formi.chain.prototype.value = function() {
   // exports data out of chain
   return this.data;
+};
+/**
+ * __Formi.compose(args...)__
+ *
+ * Defines a composite function from a 
+ * series of argument functions.
+ *
+ * @param   {Functions}  Arguments
+ * @return  {Function} Function
+ */
+
+Formi.compose = function() {
+  var funcs = slice(arguments);
+
+  if (Array.isArray(funcs[0])) {
+    funcs = funcs[0];
+  }
+
+  return function() {
+    var chain = Formi.chain.apply(undefined, arguments);
+
+    for (var i=0; i<funcs.length; i++) {
+      chain.pipe(funcs[i]);
+    }
+
+    return chain.value();
+  };
 };
 return Formi;
 }));

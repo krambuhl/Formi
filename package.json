@@ -1,6 +1,6 @@
 {
   "name": "formi",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Functional Programming API",
   "main": "dist/formi.js",
   "scripts": {

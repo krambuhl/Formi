@@ -36,3 +36,4 @@ function Formi(func) {
 //=include("./version.js")
 //=include("./identity.js")
 //=include("./chain.js")
+//=include("./compose.js")
