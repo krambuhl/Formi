@@ -90,12 +90,12 @@
             <h1>identity</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>Formi.identity()</span> -><span>List</span>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.identity()</span> -><span>Arguments</span>
             </p>
           </section>
           <div class="description"><p><strong>Formi.identity(func, args...)</strong></p><p>Returns all passed arguments unmodified.  Usually used internally.</p> </div>
           <pre><code class="language-javascript">Formi.identity = function() {
-  if (arguments.length === 1) {
+  if (!Array.isArray(arguments) &amp;&amp; arguments.length === 1) {
     return arguments[0];
   } else if (arguments.length === 0) {
     return undefined;

@@ -1,7 +1,7 @@
 Formi
 === 
 
-Functional API.
+Functional Programming API.
 
 ###Status
 
@@ -34,13 +34,6 @@ var or = function() {
 Formi(not, true) // ==> false
 Formi(or, false, false) // ==> false
 Formi(or, false, true, false) // ==> true
-
-
-var nor = function() {
-    return Formi(not, Formi(or, arguments));
-};
-
-Formi(nor, [false, false]) // ==> true
 ```
 
 ###Formi.chain(args...)
@@ -62,23 +55,31 @@ var even = function() {
     });
 }
 
-var addEven = function() {
-    return Formi(add, Formi(even, arguments));
-}
-
 Formi.chain(1, 2, 3, 4)
     .pipe(even)
     .pipe(add)
     .value(); // ==> 6
 ```
 
-####Composite Functions
+####Formi.chain().pipe(func)
+
+Define function used to transform wrapped data.
+
+####Formi.chain().value();
+
+Return wrapped data
+
+
+###Composite Functions
 
 In simple chains like above, it might make sense to create a composite functions using Formi.
 
 ```js
 var addEven = function() {
-    return Formi(add, Formi(even, arguments));
+    return Formi.chain(arguments)
+        .pipe(even)
+        .pipe(add)
+        .value();
 }
 
 Formi(addEven, 1, 2, 3, 4) // ==> 6

@@ -111,17 +111,17 @@ function Formi(func) {
  * Keep track of version tied to `package.json`
  */
 
- Formi.version = '0.1.0';
+ Formi.version = '0.2.0';
 /**
  * __Formi.identity(func, args...)__
  *
  * Returns all passed arguments unmodified.  Usually used internally.
  *
- * @return {List} Arguments values passed to identity.
+ * @return {Arguments} Arguments returns values passed to identity.
  */
 
 Formi.identity = function() {
-  if (arguments.length === 1) {
+  if (!Array.isArray(arguments) && arguments.length === 1) {
     return arguments[0];
   } else if (arguments.length === 0) {
     return undefined;
