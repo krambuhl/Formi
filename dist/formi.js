@@ -64,7 +64,7 @@ function normalize(argumts, offset, chaining) {
 
   // data is always sent as a list
   if (args.length === 1) {
-    if (Array.isArray(args[0]) || chaining) {
+    if (chaining || (Array.isArray(args[0]) && args[0].length > 0)) {
       return args[0];
     } else {
       return [args[0]];
@@ -111,7 +111,7 @@ function Formi(func) {
  * Keep track of version tied to `package.json`
  */
 
- Formi.version = '0.3.0';
+ Formi.version = '0.4.0';
 /**
  * __Formi.identity(func, args...)__
  *
@@ -121,9 +121,11 @@ function Formi(func) {
  */
 
 Formi.identity = function() {
+  console.log(arguments);
   if (!Array.isArray(arguments) && arguments.length === 1) {
     return arguments[0];
   } else if (arguments.length === 0) {
+    console.log('ds')
     return undefined;
   }
 
@@ -211,6 +213,62 @@ Formi.compose = function() {
     }
 
     return chain.value();
+  };
+};
+/**
+ * __Formi.map(func)__
+ *
+ * Defines a function that applies 
+ * a function to a set of data
+ *
+ * @param   {Function} Function   
+ * @return  {Function} Function
+ */
+
+Formi.map = function(func) {
+  if (func === undefined) {
+    func = Formi.identity;
+  }
+
+  return function() {
+    var args = normalize(arguments);
+
+    if (args) {
+      if (args.length > 1) {
+        return args.map(func);
+      }
+
+      if (args.length === 1) {
+        return Formi(func, args);
+      } 
+    }
+
+    return args;
+  };
+};
+/**
+ * __Formi.reduce(func)__
+ *
+ * Defines a function that reduces a 
+ * set of data using a supplied function.
+ *
+ * @param   {Function} Function   
+ * @return  {Function} Function
+ */
+
+Formi.reduce = function(func, initial) {
+  if (func === undefined) {
+    func = Formi.identity;
+  }
+
+  return function() {
+    var args = normalize(arguments);
+
+    if (!args) {
+      args = [];
+    }
+
+    return args.reduce(func, initial);
   };
 };
 return Formi;

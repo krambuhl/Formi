@@ -7,9 +7,11 @@
  */
 
 Formi.identity = function() {
+  console.log(arguments);
   if (!Array.isArray(arguments) && arguments.length === 1) {
     return arguments[0];
   } else if (arguments.length === 0) {
+    console.log('ds')
     return undefined;
   }
 

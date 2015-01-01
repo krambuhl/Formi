@@ -37,3 +37,5 @@ function Formi(func) {
 //=include("./identity.js")
 //=include("./chain.js")
 //=include("./compose.js")
+//=include("./map.js")
+//=include("./reduce.js")

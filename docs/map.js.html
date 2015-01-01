@@ -71,101 +71,69 @@
       <div class="row">
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
-            <li class="active"><a href="index.html">Main</a></li>
+            <li><a href="index.html">Main</a></li>
             <li><a href="chain.js.html">chain.js</a></li>
             <li><a href="compose.js.html">compose.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
             <li><a href="identity.js.html">identity.js</a></li>
-            <li><a href="map.js.html">map.js</a></li>
+            <li class="active"><a href="map.js.html">map.js</a></li>
             <li><a href="reduce.js.html">reduce.js</a></li>
             <li><a href="utilities.js.html">utilities.js</a></li>
             <li><a href="version.js.html">version.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#map"><i class="alert alert-info"></i><span>map</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="Main"><h1>Formi</h1>
-<p>Functional Programming API. </p><h3>Status</h3>
-<p><a href="https://codeship.com/projects/52245"><img src="https://codeship.com/projects/2b973c80-6323-0132-0a27-4ad47cf4b99f/status?branch=develop" alt="Codeship"></a></p><p><a href="https://codeclimate.com/github/krambuhl/Formi"><img src="https://codeclimate.com/github/krambuhl/Formi/badges/gpa.svg" alt="Code Climate"></a></p><p><a href="https://codeclimate.com/github/krambuhl/Formi"><img src="https://codeclimate.com/github/krambuhl/Formi/badges/coverage.svg" alt="Test Coverage"></a></p><h1>API Docs</h1>
-<p>Formi exposes the <code>Formi</code> function. </p><h2>Formi(function, args...)</h2>
-<p><strong>Example</strong></p><pre><code class="lang-js">// define predicate function
-var not = function(val) {
-    return !val;
-};
+          <section id="map">
+            <h1>map</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>Formi.map()</span> -><span>Function</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Function</td>
+                <td>Function</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p><strong>Formi.map(func)</strong></p><p>Defines a function that applies<br />a function to a set of data</p> </div>
+          <pre><code class="language-javascript">Formi.map = function(func) {
+  if (func === undefined) {
+    func = Formi.identity;
+  }
 
-var or = function() {
-    return _.some(arguments);
-};
+  return function() {
+    var args = normalize(arguments);
 
-Formi(not, true) // ==&gt; false
-Formi(or, false, false) // ==&gt; false
-Formi(or, false, true, false) // ==&gt; true
-</code></pre>
-<h2>Formi.chain(args...)</h2>
-<p>Creates a chain for transforming data.</p><p><strong>Example</strong></p><pre><code class="lang-js">var sum = function() {
-    return _.reduce(arguments, function(total, num) {
-        return total + num;
-    }, 0)
-}
+    if (args) {
+      if (args.length &gt; 1) {
+        return args.map(func);
+      }
 
-var even = function() {
-    return _.filter(arguments, function(val) {
-        return val % 2 === 0;
-    });
-}
-
-Formi.chain(1, 2, 3, 4)
-    .pipe(even)
-    .pipe(sum)
-    .value(); // ==&gt; 6
-</code></pre>
-<h3>Formi.chain().pipe(func)</h3>
-<p>Define function used to transform wrapped data.</p><h3>Formi.chain().value();</h3>
-<p>Return wrapped data</p><h2>Formi.compose(funcs...)</h2>
-<p>Defines a composite function from a series of argument functions.</p><p><code>f(g(h(arg))) === Formi.compose(h, g, f)(arg)</code></p><p><strong>Example</strong></p><p>Both of these expamples define the same function.</p><pre><code class="lang-js">var sumEven = Formi.compose(even, sum);
-
-var sumEven = function() {
-    return Formi.chain(arguments)
-        .pipe(even)
-        .pipe(sum)
-        .value();
-}
-
-Formi(sumEven, 2, 3, 4, 5); //==&gt; 6
-</code></pre>
-<h2>Formi.map(func)</h2>
-<p>Defines a function that applies a function to a set of data</p><p><strong>Example</strong></p><pre><code class="lang-js">var half = Formi.map(function(num) {
-    return num / 2;
-});
-
-half(2) //==&gt; 1
-half(3, 4) //==&gt; [1.5, 2]
-half([4, 8]) //==&gt; [2, 4]
-</code></pre>
-<h2>Formi.reduce(func, [value])</h2>
-<p>Defines a function that reduces a set of data using a supplied function.  A second argument can be provided to define an initial reduction value.</p><p><strong>Example</strong></p><pre><code class="lang-js">var sum = Formi.reduce(function(total, num) {
-    return total + num;
-}, 0);
-
-sum(12) //==&gt; 12
-sum(3, 4) //==&gt; 7
-sum([7, 10]) //==&gt; 17
-
-var even = Formi.reduce(function(arr, num) {
-    if (num % 2) {
-        arr.push(num);
+      if (args.length === 1) {
+        return Formi(func, args);
+      } 
     }
-    return arr;
-}, []);
 
-even(1) //==&gt; []
-even(1, 2, 3, 4) //==&gt; [2, 4]
-even([1, 2, 3, 4]) //==&gt; [2, 4]
-</code></pre>
-</section>
+    return args;
+  };
+};</code></pre>
         </div>
       </div>
     </div>

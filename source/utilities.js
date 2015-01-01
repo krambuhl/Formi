@@ -53,7 +53,7 @@ function normalize(argumts, offset, chaining) {
 
   // data is always sent as a list
   if (args.length === 1) {
-    if (Array.isArray(args[0]) || chaining) {
+    if (chaining || (Array.isArray(args[0]) && args[0].length > 0)) {
       return args[0];
     } else {
       return [args[0]];
