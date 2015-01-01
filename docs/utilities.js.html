@@ -76,6 +76,8 @@
             <li><a href="compose.js.html">compose.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
             <li><a href="identity.js.html">identity.js</a></li>
+            <li><a href="map.js.html">map.js</a></li>
+            <li><a href="reduce.js.html">reduce.js</a></li>
             <li class="active"><a href="utilities.js.html">utilities.js</a></li>
             <li><a href="version.js.html">version.js</a></li>
           </ul>
@@ -204,7 +206,7 @@
 
   // data is always sent as a list
   if (args.length === 1) {
-    if (Array.isArray(args[0]) || chaining) {
+    if (chaining || (Array.isArray(args[0]) &amp;&amp; args[0].length &gt; 0)) {
       return args[0];
     } else {
       return [args[0]];

@@ -27,6 +27,12 @@ suite('Formi()', function() {
     data.should.be.equal(2);
   });
 
+  test('#Formi(EmptyArray)', function() {
+    var data = Formi([]);
+    data.should.be.instanceOf(Array);
+    data.length.should.be.equal(0);
+  });
+
   test('#Formi(undefined)', function() {
     var data = Formi(undefined);
     (data === undefined).should.be.equal(true);

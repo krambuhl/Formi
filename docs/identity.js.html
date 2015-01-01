@@ -76,6 +76,8 @@
             <li><a href="compose.js.html">compose.js</a></li>
             <li><a href="formi.js.html">formi.js</a></li>
             <li class="active"><a href="identity.js.html">identity.js</a></li>
+            <li><a href="map.js.html">map.js</a></li>
+            <li><a href="reduce.js.html">reduce.js</a></li>
             <li><a href="utilities.js.html">utilities.js</a></li>
             <li><a href="version.js.html">version.js</a></li>
           </ul>
@@ -96,9 +98,11 @@
           </section>
           <div class="description"><p><strong>Formi.identity(func, args...)</strong></p><p>Returns all passed arguments unmodified.  Usually used internally.</p> </div>
           <pre><code class="language-javascript">Formi.identity = function() {
+  console.log(arguments);
   if (!Array.isArray(arguments) &amp;&amp; arguments.length === 1) {
     return arguments[0];
   } else if (arguments.length === 0) {
+    console.log('ds')
     return undefined;
   }
 
